@@ -9,6 +9,7 @@
     <mat-action-row>
       <button mat-button [routerLink]="['/edit', post._id]" color="primary">EDIT</button>
       <button mat-button (click)="onDelete(post._id)" color="warn">DELETE</button>
+      <button mat-button (click)="onLike(post._id)" color="secondary">{{post.like}} LIKES</button>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>

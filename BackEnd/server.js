@@ -4,16 +4,16 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://admin:hello123@ds239903.mlab.com:39903/lab5';
+var mongoDB = 'mongodb://Tommey:me12345@ds255463.mlab.com:55463/lab4';
 mongoose.connect(mongoDB);
 
 var Schema = mongoose.Schema;
 var postSchema = new Schema({
     title: String,
-    content: String
+    content: String,
+    like: String
 })
 var PostModel = mongoose.model('post', postSchema);
-
 
 //Here we are configuring express to use body-parser as middle-ware. 
 app.use(bodyParser.urlencoded({ extended: false })); 
@@ -41,13 +41,14 @@ app.post('/api/posts', function(req, res){
     console.log("post successful");
     console.log(req.body.title);
     console.log(req.body.content);
+    console.log(req.body.like);
 
     PostModel.create({
         title: req.body.title,
-        content: req.body.content
+        content: req.body.content,
+        like: req.body.like
     });
     res.send('Item added');
-
 
 })
 
@@ -71,6 +72,7 @@ app.put('/api/posts/:id', function(req, res){
     console.log("Update Post" +req.params.id);
     console.log(req.body.title);
     console.log(req.body.content);
+    console.log(req.body.like);
 
     PostModel.findByIdAndUpdate(req.params.id, req.body, 
         function(err, data){
@@ -89,6 +91,24 @@ app.delete('/api/posts/:id', function(req, res){
         res.send(data);
     })
 })
+
+/*app.like('/api/posts/:id', function(req, res){
+    console.log("Update like on Post" +req.params.id);
+    console.log(req.body.title);
+    console.log(req.body.content);
+    console.log(req.body.like);
+
+    PostModel.likeOne({id:req.params.id,title:req.body.title,content:req.body.content,like:req.body.like},
+    function(err,data)
+    {
+        var likeAsNum = parseInt(like);
+        console.log(likeAsNum);
+
+        if(err)
+            res.send(err);
+        res.send(data);
+    })
+})*/
 
 
 var server = app.listen(8081, function () {

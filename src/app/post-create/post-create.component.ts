@@ -12,17 +12,16 @@ export class PostCreateComponent implements OnInit {
   constructor(private service:PostService) { }
 
   onAddPost(form: NgForm) {
+    
+    form.value.like = "0";
 
-    this.service.addPost(form.value.title, form.value.content).subscribe();
+    this.service.addPost(form.value.title, form.value.content, form.value.like).subscribe(this.ngOnInit);
     
     console.log(form.value);
     form.resetForm();
   }
 
-
   ngOnInit() {
-
-
 
   }
 
