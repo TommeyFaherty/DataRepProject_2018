@@ -21,12 +21,6 @@ export class PostDetailsComponent implements OnInit {
   ngOnInit(){
     this.ps.getPostsData().subscribe(data => {
         this.posts = data;
-
-        //Get number of likes from data
-      /*  let likes = data[0];
-        console.log(data);
-        //console.log(likes["like"]);
-        this.myLike = likes["like"];*/
     });
   }
 
@@ -53,7 +47,6 @@ export class PostDetailsComponent implements OnInit {
 
       if(checker["_id"] === id)
       {
-        console.log("found it");
         found = true;
         break;
       }
@@ -62,16 +55,14 @@ export class PostDetailsComponent implements OnInit {
 
     let checker = this.posts[i];
     console.log(id+" matches "+checker["_id"]);
-
     this.myLike = checker["like"];
 
     //Increment Number of likes for this post
     var likeAsNum;
-    likeAsNum = parseInt(this.myLike);
+    likeAsNum = parseInt(this.myLike);       //Change to integer for incrementing
     likeAsNum ++;
     console.log("like incremented!\nNew number of likes: "+likeAsNum);
-    like = likeAsNum.toString();
-    //console.log(like);
+    like = likeAsNum.toString();             //Back to string for data type
 
     this.ps.LikedPost(id, title, content, like).subscribe(() =>
     {
