@@ -11,13 +11,19 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
   
-    getPostsData(): Observable<any> {
-      return this.http.get("http://localhost:8081/api/posts");
-    }
+  getPostsData(): Observable<any> {
+    return this.http.get("http://localhost:8081/api/posts");
+  }
 
   addPost(title: string, content: string, like : string): Observable<any> {
     const post: Post = {title: title, content: content, like: like};
     return this.http.post("http://localhost:8081/api/posts",post);
+  }
+
+  top3Posts(id: string, title: string, content: string, like: string): Observable<any>{
+    const post: Post = {title:title, content: content, like:like}
+    return this.http.post("http://localhost:8081/api/posts"+id,post);
+
   }
 
   deletePost(id: String): Observable<any> {

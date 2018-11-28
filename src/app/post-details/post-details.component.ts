@@ -14,7 +14,6 @@ export class PostDetailsComponent implements OnInit {
   posts: any = [];
   myTitle: String;
   myLike: string;
-  Config : any = [];
 
   constructor(private router:Router, private route: ActivatedRoute,private ps:PostService){}
 
