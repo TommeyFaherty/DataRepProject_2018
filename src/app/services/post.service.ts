@@ -20,12 +20,6 @@ export class PostService {
     return this.http.post("http://localhost:8081/api/posts",post);
   }
 
-  top3Posts(id: string, title: string, content: string, like: string): Observable<any>{
-    const post: Post = {title:title, content: content, like:like}
-    return this.http.post("http://localhost:8081/api/posts"+id,post);
-
-  }
-
   deletePost(id: String): Observable<any> {
     return this.http.delete("http://localhost:8081/api/posts/"+id);
   }
@@ -42,5 +36,10 @@ export class PostService {
   LikedPost(id:String, title: string, content: string, like: string): Observable<any> {
     const post: Post = {title: title, content: content, like: like};
   return this.http.put("http://localhost:8081/api/posts/"+id, post);
+  }
+
+  top3Posts(id: string): Observable<any>{
+    console.log("Check id: "+id);
+    return this.http.get("http://localhost:8081/api/posts/"+id);
   }
 }

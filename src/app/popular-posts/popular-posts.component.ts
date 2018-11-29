@@ -16,7 +16,12 @@ export class PopularPostsComponent implements OnInit {
   constructor(private ps: PostService) { }
 
   ngOnInit() {
-    this.ps.getPostsData().subscribe(data => {
+    let highId : any = [];
+    highId = this.top3Posts();
+
+    console.log("The high id: "+highId[0]);
+
+    this.ps.top3Posts(highId).subscribe(data => {
       this.posts = data;
     });
   }
@@ -25,19 +30,21 @@ export class PopularPostsComponent implements OnInit {
     let id: string,title: string, content: string, like: string;
     const posts: Post = {title: title, content: content, like: like}
 
-    //Code here
+    //Variables
     let highId : any = [];
-    let highNum: number[] = [0,0,0];
+    let highNum: number[] = [0,0,0]; //highNum[0] is the highest and highNum[2] is the lowest of array
     let i : number = 0;
 
     while(i < this.posts.length)
     {
       let checker = this.posts[i];
       let likeAsNum = parseInt(checker["like"]);
+      console.log(likeAsNum);
       
+          //Check if likes is higher than current numbers
           if(likeAsNum > highNum[0])
           {
-            //move the other posts down
+            //move the other posts down in array
             highNum[0] = highNum[1];
             highId[0] = highId[1];
 
@@ -50,8 +57,8 @@ export class PopularPostsComponent implements OnInit {
           }
           else if(likeAsNum > highNum[1] || likeAsNum == highNum[0])
           {
-            highNum[1] = highNum[2];
-            highId[1] = highId[2];
+            highNum[2] = highNum[1];
+            highId[2] = highId[1];
 
             highNum[1] = likeAsNum;
             highId[1] = checker["_id"];
@@ -62,16 +69,10 @@ export class PopularPostsComponent implements OnInit {
             highId[2] = checker["_id"];
           }
          i++;
+         console.log(checker["_id"]);
     }
-
-    for(i=0; i<3; i++)
-    {
-      //Change addPost
-      this.ps.top3Posts(highId[i],title,content,like).subscribe(data =>{
-          this.ngOnInit();
-      })
-    }
+      return highId;
+      //console.log(i);
+    
   }
-
-
 }

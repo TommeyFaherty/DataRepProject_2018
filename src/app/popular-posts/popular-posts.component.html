@@ -1,5 +1,7 @@
+
 <mat-toolbar color="primary">Posts List</mat-toolbar>
 <mat-accordion multi="true" *ngIf="posts.length > 0">
+  <button (click)="top3Posts()">check button</button>
   <mat-expansion-panel [expanded]="true" *ngFor="let post of posts">
     <mat-expansion-panel-header>
       {{ post.title }}
@@ -7,7 +9,6 @@
     <p>{{ post.content }}</p>
     <mat-action-row>
       <p>{{ post.like }} likes!</p>
-      <button onclick="top3Posts()">check button</button>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
