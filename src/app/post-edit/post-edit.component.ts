@@ -37,13 +37,4 @@ export class PostEditComponent implements OnInit {
       this.router.navigate(['/list']);
     });
   }
-
-  onLike(form: NgForm){
-    console.log("Liked "+ this.post._id);
-    this.service.updatePost(this.post._id, form.value.title, form.value.content, form.value.like).subscribe(() =>
-    {
-      this.router.navigate(['/list']);
-    });
-  }
-
 }

@@ -48,7 +48,7 @@ app.post('/api/posts', function(req, res){
         content: req.body.content,
         like: req.body.like
     });
-    res.send('Item added');
+    res.json({message:'Item added'});
 
 })
 
@@ -64,12 +64,14 @@ app.get('/api/posts/:id', function(req, res){
     //PostModel.find({_id : req.params.id}, 
     PostModel.findById(req.params.id,
         function (err, data) {
+            console.log(req.body);
             res.json(data);
         });
+        
 })
 
 app.put('/api/posts/:id', function(req, res){
-    console.log("Update Post" +req.params.id);
+    console.log("Update Post \n" +req.params.id);
     console.log(req.body.title);
     console.log(req.body.content);
     console.log(req.body.like);

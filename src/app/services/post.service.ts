@@ -39,7 +39,7 @@ export class PostService {
   }
 
   top3Posts(id: string): Observable<any>{
-    console.log("Check id: "+id);
+    console.log("gets to here");
     return this.http.get("http://localhost:8081/api/posts/"+id);
   }
 }
