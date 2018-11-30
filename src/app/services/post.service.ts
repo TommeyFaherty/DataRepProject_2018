@@ -37,9 +37,4 @@ export class PostService {
     const post: Post = {title: title, content: content, like: like};
   return this.http.put("http://localhost:8081/api/posts/"+id, post);
   }
-
-  top3Posts(id: string): Observable<any>{
-    console.log("gets to here");
-    return this.http.get("http://localhost:8081/api/posts/"+id);
-  }
 }
